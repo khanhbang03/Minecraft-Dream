@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Giấc mơ Minecraft</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(#87ceeb, #ffffff);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      width: 80%;
+      max-width: 800px;
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    h1 {
+      text-align: center;
+    }
+    #story {
+      margin: 20px 0;
+      font-size: 18px;
+      line-height: 1.6;
+      min-height: 160px;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    button {
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    .next { background: #4caf50; color: white; }
+    .prev { background: #f44336; color: white; }
+    .day { background: #ffeb3b; }
+    .night { background: #3f51b5; color: white; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Giấc mơ Minecraft</h1>
+    <div id="story"></div>
+    <div class="buttons">
+      <button class="prev" onclick="prevDay()">Ngày trước đó</button>
+      <button class="next" onclick="nextDay()">Ngày tiếp theo</button>
+      <button class="day" onclick="setDay()">Chuyển sang ngày</button>
+      <button class="night" onclick="setNight()">Chuyển sang đêm</button>
+    </div>
+  </div>
+
+  <script>
+    let dayIndex = 0;
+    let isNight = false;
+
+    const stories = [
+      "Ngày 1: Bạn tỉnh dậy trong một thế giới Minecraft lạ lẫm. Xung quanh là rừng cây vuông vức, tiếng chim kêu nhẹ nhàng và mặt trời đang lên.",
+      "Ngày 2: Bạn bắt đầu chặt gỗ, chế tạo công cụ đầu tiên và xây một căn nhà nhỏ để trú ẩn. Thế giới rộng lớn dần mở ra trước mắt.",
+      "Ngày 3: Bạn khám phá hang động sâu thẳm, tìm thấy than, sắt và nghe thấy tiếng quái vật vọng lại từ bóng tối.",
+      "Ngày 4: Một ngôi làng xuất hiện ở phía xa. Dân làng chào đón bạn, và bạn cảm thấy mình không còn đơn độc trong giấc mơ này.",
+      "Ngày 5: Bạn đứng trên đỉnh núi cao, nhìn toàn bộ thế giới Minecraft trải dài vô tận, nhận ra đây là giấc mơ nhưng cũng rất thật."
+    ];
+
+    function renderStory() {
+      const baseStory = stories[dayIndex] || "Giấc mơ vẫn tiếp diễn, nhưng chưa có câu chuyện cho ngày này.";
+      const nightText = " Đêm xuống, quái vật xuất hiện, bầu trời đầy sao và bạn phải cẩn trọng hơn từng bước đi.";
+      document.getElementById('story').innerText = isNight ? baseStory + nightText : baseStory;
+      document.body.style.background = isNight
+        ? 'linear-gradient(#0d1b2a, #000000)'
+        : 'linear-gradient(#87ceeb, #ffffff)';
+    }
+
+    function nextDay() {
+      if (dayIndex < stories.length - 1) dayIndex++;
+      renderStory();
+    }
+
+    function prevDay() {
+      if (dayIndex > 0) dayIndex--;
+      renderStory();
+    }
+
+    function setDay() {
+      isNight = false;
+      renderStory();
+    }
+
+    function setNight() {
+      isNight = true;
+      renderStory();
+    }
+
+    renderStory();
+  </script>
+</body>
+</html>
